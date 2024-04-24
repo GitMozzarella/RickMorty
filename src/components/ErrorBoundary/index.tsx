@@ -1,5 +1,5 @@
 import { Component, ReactNode, ErrorInfo } from 'react'
-
+import { ErrorMessage } from '../../constants/errorMessages'
 interface ErrorBoundaryProps {
 	children: ReactNode
 }
@@ -21,13 +21,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 	}
 
 	componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-		console.error('Error:', error.message)
-		console.error('Error Info:', errorInfo)
+		console.error(ErrorMessage.errorDidCatch, error.message)
+		console.error(ErrorMessage.errorDidCatchInFo, errorInfo)
 	}
 
 	render(): ReactNode {
 		if (this.state.hasError) {
-			return <h3>Ошибка получения данных</h3>
+			return <h3>{ErrorMessage.dataCatchError}</h3>
 		}
 		return this.props.children
 	}
